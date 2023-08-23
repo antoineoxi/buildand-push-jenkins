@@ -1,7 +1,7 @@
 node {
 
-   def registryProjet='quenec/'
-   def IMAGE="${registryProjet}app:3.8"
+   def registryProjet='formation/'
+   def IMAGE="${registryProjet}app-antoine:3.8"
 
     stage('Clone') {
           checkout scm
@@ -12,13 +12,13 @@ node {
     }
 
     stage('Run') {
-          img.withRun("--name run-$BUILD_ID -p 8000:80") { c ->
+          img.withRun("--name run-$BUILD_ID -p 8999:80") { c ->
        
           }
     }
 
     stage('Push') {
-       docker.withRegistry('https://registry.hub.docker.com/' , 'docker_id') {
+       docker.withRegistry('https://registry.ludovic.tech/' , 'harbor_id') {
               img.push 'latest'
               img.push()
           }
